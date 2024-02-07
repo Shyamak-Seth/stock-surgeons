@@ -221,7 +221,7 @@
             flex-direction: column;
         }
         .collapsableDivs {
-            display: flex;
+            display: flex;  
             flex-direction: column;
             width: 600px;
             color: white;
@@ -312,6 +312,14 @@
             50% {transform: translateY(-20px)}
             100% {transform: translateY(0px)}
         }
+        .submitButton{
+            margin-top: 40px;
+            width: 500px;
+            height: 50px;
+            border-radius: 12px;
+            margin-left: 200px;
+
+        }
     </style>
 </head>
 <body>
@@ -397,7 +405,7 @@
             </div>
         </div>
         <div class="gameBox">
-            <form method="POST" target="">
+            <form target="">
                 <div class="inputContainer">
                     <label for="fullName" id="fullNameLabel">Name:</label>
                     <input type="text" name="fullName" id="fullName" onfocus="handleInputFocus('fullNameLabel')" onblur="handleInputBlur('fullNameLabel', event)">
@@ -495,6 +503,8 @@
                     <label for="name" id="suggestions">Any other suggestions (any other varied sources of income you would like to invest into other than stocks and etfs):</label>
                     <input type="text" name="name" onfocus="handleInputFocus('suggestions')" onblur="handleInputBlur('suggestions', event)">
                 </div>
+
+                <button class="submitButton" >Submit</button>
 
             </form>
         </div>
