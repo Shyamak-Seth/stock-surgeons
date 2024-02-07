@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Stock Surgeons - Home</title>
+    <style>
+        * {box-sizing: border-box;}
+        body {
+            margin: 0px;
+            font-family: 'Open Sans', sans-serif;
+            overflow-x: hidden;
+            background-color: black;
+        }
+        .socialIcons {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            top: 38%;
+            right: 5%;
+        }
+        .socialIcon {
+            font-size: 2.8em;
+            color: white;
+        }
+        ::-webkit-scrollbar {
+            width: 10px;
+            background-color: #111;
+        }
+        ::-webkit-scrollbar-thumb {
+            width: 10px;
+            background-color: #333;
+            border-radius: 50px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #222;
+        }
+        .header {
+            width: 100vw;
+            position: relative;
+        }
+        .bgvid {
+            width: 100vw;
+            z-index: -2;
+            position: relative;
+        }
+        .bgOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100%;
+            z-index: -1;
+            background-color: rgba(0, 0, 0, 0.65);
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+        .logoText {
+            padding: 30px;
+        }
+        .navItems {
+            display: flex;
+        }
+        .navItem {
+            padding: 30px 15px;
+        }
+        .logoImg {
+            position: absolute;
+            top: 35%;
+            width: 25vw;
+            left: 17%;
+        }
+        .headerHeading {
+            position: absolute;
+            top: 38%;
+            right: 15%;
+            font-size: 4vw;
+            margin: 0px;
+            color: white;
+        }
+        .scrollCircle {
+            border: 2px solid white;
+            border-radius: 200px;
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            padding: 25px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1vw;
+            text-align: center;
+            line-height: 1.4;
+            cursor: pointer;
+            transition: 0.2s;
+            animation-name: bounce;
+            animation-duration: 0.8s;
+            animation-iteration-count: infinite;
+        }
+        .scrollCircle:hover {
+            background-color: white;
+            color: black;
+        }
+        .randomPhotosSection {
+            background-color: black;
+            padding: 15vh 0;
+            border-bottom: 2px solid white;
+        }
+        .randomImagesThingy {
+            display: flex;
+        }
+        .randomImagesThingy img {
+            width: 25vw;
+        }
+        .ourTeam {
+            display: flex;
+            width: 1000px;
+            gap: 30px;
+            margin: auto;
+            margin-top: 15vh;
+        }
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 30px;
+        }
+        .smallCard, .normalCard, .largeCard {
+            width: 220px; 
+            background-color: #666;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            position: relative;
+            flex-direction: column;
+            font-size: 20px;
+            text-align: center;
+            background-size: cover;
+        }
+        .column p {
+            margin: 5px 0;
+            font-size: 17px;
+            z-index: 1;
+        }
+        .column b {z-index: 1;}
+        .cardImg {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 85px;
+            top: -25px;
+            background-color: transparent;
+            padding: 8px;
+            background-color: #888;
+            border: 2px solid white;
+            border-radius: 50px;
+        }
+        .smallCard {
+            min-height: 120px;
+        }
+        .normalCard {
+            min-height: 200px;
+        }
+        .largeCard {
+            min-height: 280px;
+        }
+        .cardOverlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            background-color: rgba(0, 0, 0, 0.65);
+            z-index: 0;
+        }
+        .loadingScreen {
+            z-index: 200;
+            background-color: #000;
+            color: white;
+            font-size: Courier;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .loadingBarOut {
+            width: 80vw;
+            border: 2px solid white;
+            height: 30px;
+            display: flex;
+            align-items: center;
+        }
+        .loadingBarIn {
+            width: 0%;
+            background-color: white;
+            height: 16px;
+            margin: 0px 5px;
+        }
+        .thatSection {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 0;
+            border-bottom: 2px solid white;
+            flex-direction: column;
+        }
+        .collapsableDivs {
+            display: flex;
+            flex-direction: column;
+            width: 600px;
+            color: white;
+        }
+        .collapsable {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        .collapsableHeading {
+            width: 100%;
+            border-radius: 50px;
+            background-color: rgb(250, 6, 68);
+            color: white;
+            font-weight: bolder;
+            font-size: 25px;
+            padding: 17px 40px;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+        .collapsableDesc {
+            width: 100%;
+            background-color: #222;
+            line-height: 1.6;
+            font-size: 18px;
+            text-align: center;
+            padding: 30px;
+            transform: scale(1, 0);
+            transform-origin: top;
+            display: none;
+            transition: transform 0.4s;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+        .thatSection p {
+            text-align: center;
+            color: white;
+            font-size: 22px;
+            line-height: 1.6;
+            width: 70vw;
+        }
+        .gameBox {
+            background-color: #111;
+            border-radius: 20px;
+            width: 1000px;
+            padding: 50px;
+        }
+        .inputContainer {
+            width: 100%;
+            color: white;
+            position: relative;
+            margin-top: 25px;
+        }
+        .inputContainer input {
+            border: none;
+            border-bottom: 2px solid white;
+            background-color: transparent;
+            outline: none;
+            color: white;
+            font-size: 1em;
+            width: 100%;
+        }
+        .inputContainer select {
+            border: none;
+            border-bottom: 2px solid white;
+            background-color: transparent;
+            outline: none;
+            color: white;
+            font-size: 1em;
+            width: 100%;
+        }
+        .inputContainer label {
+            position: absolute;
+            cursor: text;
+            transition: 0.2s;
+        }
+        .inputContainer select option {
+            background-color: #444;
+            color: white;
+        }
+        
+        .inputContainer select option:checked {
+            background-color: #555;
+            color: #555;
+        }
+
+        @keyframes bounce {
+            50% {transform: translateY(-20px)}
+            100% {transform: translateY(0px)}
+        }
+    </style>
+</head>
+<body>
+    <div class="loadingScreen" id="loadingScreen">
+        <h1>Loading... <span id=loadedPercentage>0</span>%</h1>
+        <div class="loadingBarOut">
+            <div class="loadingBarIn" id="loadingBar"></div>
+        </div>
+    </div>
+    <div class="header">
+        <video class="bgvid" autoplay muted loop id="bgLoop">
+            <source src="bgVideo.mp4">
+        </video>
+        <div class="bgOverlay" id="bgOverlay"></div>
+        <div class="nav">
+            <div class="logoText">Stock Surgeons</div>
+            <div class="navItems">
+                <div class="navItem">Home</div>
+                <div class="navItem">Services</div>
+                <div class="navItem">Game</div>
+                <div class="navItem">About Us</div>
+            </div>
+            <div class="logoText" style="visibility: hidden;">Stock Surgeons</div>
+        </div>
+        <img class="logoImg" src="stockLogo.webp">
+        <h1 class="headerHeading">Precision.<br>Expertise.<br>Growth.</h1>
+        <div class="socialIcons">
+            <a href="/"><div class="socialIcon"><i class="fa fa-instagram"></i></div></a>
+            <a href="/"><div class="socialIcon"><i class="fa fa-linkedin-square"></i></div></a>
+        </div>
+        <div class="scrollCircle">Scroll<br>&darr;</div>
+    </div>
+    <div class="randomPhotosSection">
+        <div class="randomImagesThingy" id="marqueeImgs" style="position: absolute; left: 0px;">
+            <img src="stockOne.jpg">
+            <img src="stockTwo.jpg">
+            <img src="stockThree.jpg">
+            <img src="stockFour.jpg">
+            <img src="stockOne.jpg">
+            <img src="stockTwo.jpg">
+            <img src="stockThree.jpg">
+            <img src="stockFour.jpg">
+        </div>
+        <div class="randomImagesThingy" style="visibility: hidden;">
+            <img src="stockOne.jpg">
+            <img src="stockTwo.jpg">
+            <img src="stockThree.jpg">
+            <img src="stockFour.jpg">
+            <img src="stockOne.jpg">
+            <img src="stockTwo.jpg">
+            <img src="stockThree.jpg">
+            <img src="stockFour.jpg">
+        </div>
+    </div>
+    <div class="thatSection">
+        <h1 style="color: lime; text-align: center;">Our Resources</h1>
+        <div class="collapsableDivs">
+            <div class="collapsable" onclick="toggleCollapsed(event)">
+                <div class="collapsableHeading">About Us</div>
+                <div class="collapsableDesc">At Stock Surgeons, we seamlessly blend medical precision with market mastery. As adept diagnosticians, we meticulously analyze market conditions. Our trades mirror surgical maneuvers, employing in-depth analysis and proprietary tools like the <b style="color: rgb(250, 6, 68)">'Fierce Factor Program'</b> and <b style="color: rgb(250, 6, 68)">Peer Performance Tool</b>. Constantly rehabilitating portfolios for optimal performance, we offer a unique fusion of medical expertise and financial acumen. Trust us for precision investing and surgical success – your wealth in expert hands at Stock Surgeons!</div>
+            </div>
+            <div class="collapsable" onclick="toggleCollapsed(event)">
+                <div class="collapsableHeading"  style="background-color: rgb(250, 83, 0);">Peer Performance Tool</div>
+                <div class="collapsableDesc">Allows for a side-by-side evaluation by analyzing the <b style="color: rgb(250, 83, 0)">rate of increase in Stock & ETF closing prices</b> over the last 12 months, to identify the top players in the market.</div>
+            </div>
+            <div class="collapsable" onclick="toggleCollapsed(event)">
+                <div class="collapsableHeading"  style="background-color: rgb(170, 2, 255);">Fierce Factor Programme</div>
+                <div class="collapsableDesc">Inspired from the irreplaceable loyalty and fierceness of a dog in protecting their owners from any sort of danger by using a <b style="color: rgb(170, 2, 255)">Trailing Stop Loss system</b>.</div>
+            </div>
+        </div>
+    </div>
+    <div class="thatSection">
+        <h1 style="color: red; box-shadow: 4px; text-align: center;">Finance Caretakers</h1>
+        <p>Welcome to Finance Caretakers, a unique and innovative game where players unleash their creativity to design imaginary characters while challenging the Stock Surgeons to craft tailored portfolio plans available on their Instagram page.</p>
+        <div class="collapsableDivs">
+            <div class="collapsable" onclick="toggleCollapsed(event)">
+                <div class="collapsableHeading">Rules</div>
+                <div class="collapsableDesc">1. The amount for investment cannot be more than $100,000<br><br>
+                    2. Name should not be associated to any public figure<br><br>
+                    3. Time period for long term goals and short term goals should not be same<br><br>
+                    4. Maximum requested Return on Investment(ROI) for short term can be 45%<br><br>
+                    5. Maximum requested Return on Investment(ROI) for long term can be 70%</div><br>
+            </div>
+        </div>
+        <div class="gameBox">
+            <form method="POST" target="">
+                <div class="inputContainer">
+                    <label for="fullName" id="fullNameLabel">Name:</label>
+                    <input type="text" name="fullName" id="fullName" onfocus="handleInputFocus('fullNameLabel')" onblur="handleInputBlur('fullNameLabel', event)">
+                </div>
+                <div class="inputContainer">
+                    <select name="age" id="ageSelect">
+                        <option disabled selected>Age:</option>
+                    </select>
+                </div>
+                <div class="inputContainer">
+                    <label for="shortTerm1" id="shortTerm1Label">Short Term Goal 1:</label>
+                    <input type="text" name="shortTerm1" id="shortTerm1" onfocus="handleInputFocus('shortTerm1Label')" onblur="handleInputBlur('shortTerm1Label', event)">
+                </div>
+
+                <div class="inputContainer">
+                    <label for="name" id="shortTerm2Label">Short Term Goal 2 (Optional):</label>
+                    <input type="text" name="name" onfocus="handleInputFocus('shortTerm2Label')" onblur="handleInputBlur('shortTerm2Label', event)">
+                </div>
+
+                <div class="inputContainer">
+                    <label for="name" id="shortTerm3Label">Short Term Goal 3 (Optional):</label>
+                    <input type="text" name="name" onfocus="handleInputFocus('shortTerm3Label')" onblur="handleInputBlur('shortTerm3Label', event)">
+                </div>
+
+                <div class="inputContainer">
+                    <label for="name" id="shortTerm4Label">Short Term Goal 4 (Optional):</label>
+                    <input type="text" name="name" onfocus="handleInputFocus('shortTerm4Label')" onblur="handleInputBlur('shortTerm4Label', event)">
+                </div>
+
+                <div class="inputContainer">
+                    <label for="name" id="shortTerm5Label">Short Term Goal 5 (Optional):</label>
+                    <input type="text" name="name" onfocus="handleInputFocus('shortTerm5Label')" onblur="handleInputBlur('shortTerm5Label', event)">
+                </div>
+
+                <div class="inputContainer">
+                    <label for="name" id="longTerm1Label">Long Term Goal 1</label>
+                    <input type="text" name="name" onfocus="handleInputFocus('longTerm1Label')" onblur="handleInputBlur('longTerm1Label', event)">
+                </div>
+
+                <div class="inputContainer">
+                    <label for="name" id="longTerm2Label">Long Term Goal 2 (Optional):</label>
+                    <input type="text" name="name" onfocus="handleInputFocus('longTerm2Label')" onblur="handleInputBlur('longTerm2Label', event)" >
+                </div>
+
+                <div class="inputContainer">
+                    <label for="name" id="longTerm3Label">Long Term Goal 3 (Optional):</label>
+                    <input type="text" name="name" onfocus="handleInputFocus('longTerm3Label')" onblur="handleInputBlur('longTerm3Label', event)">
+                </div>
+
+                <div class="inputContainer">
+                    <label for="name" id="longTerm4Label">Long Term Goal 4 (Optional):</label>
+                    <input type="text" name="name" onfocus="handleInputFocus('longTerm4Label')" onblur="handleInputBlur('longTerm4Label', event)">
+                </div>
+
+                <div class="inputContainer">
+                    <label for="name" id="longTerm5Label">Long Term Goal 5 (Optional):</label>
+                    <input type="text" name="name" onfocus="handleInputFocus('longTerm5Label')" onblur="handleInputBlur('longTerm5Label', event)">
+                </div>
+
+                <div class="inputContainer">
+                    <label for="name" id="shortTermAmount">Short term investment amout:</label>
+                    <input type="text" name="name" onfocus="handleInputFocus('shortTermAmount')" onblur="handleInputBlur('shortTermAmount', event)">
+                </div>
+
+                <div class="inputContainer">
+                    <label for="name" id="shortTermPeriod">Short term period (what do you consider the time for Short term investment):</label>
+                    <input type="text" name="name" onfocus="handleInputFocus('shortTermPeriod')" onblur="handleInputBlur('shortTermPeriod', event)">
+                    <datalist id="shotTermList">
+                        <option value="1 year">
+                        <option value="2 years">
+                        <option value="3 years">
+                        <option value="4 years">
+                        <option value="5 years">
+                    </datalist>
+                </div>
+
+                <div class="inputContainer">
+                    <label for="name" id="longTermAmount">Long term investment amout:</label>
+                    <input type="text" name="name" onfocus="handleInputFocus('longTermAmount')" onblur="handleInputBlur('longTermAmount', event)">
+                </div>
+
+                <div class="inputContainer">
+                    <label for="name" id="longTermPeriod">Long term period _(what do you consider the time for long term investment):</label>
+                    <input type="text" name="name" onfocus="handleInputFocus('longTermPeriod')" onblur="handleInputBlur('longTermPeriod', event)">
+                    <datalist id="shotTermList">
+                        <option value="1 year">
+                        <option value="2 years">
+                        <option value="3 years">
+                        <option value="4 years">
+                        <option value="5 years">
+                    </datalist>
+                </div>
+
+                <div class="inputContainer">
+                    <label for="name" id="suggestions">Any other suggestions (any other varied sources of income you would like to invest into other than stocks and etfs):</label>
+                    <input type="text" name="name" onfocus="handleInputFocus('suggestions')" onblur="handleInputBlur('suggestions', event)">
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="ourTeam" id="ourTeam">
+        <div class="column">
+            <div class="smallCard" style="background-color: #ddd;">
+                Our Team
+                <img src="ourTeamLogo.svg" class="cardImg">
+            </div>
+            <div class="largeCard" style="background-image: url('/financeImage.jpg'); color: white;">
+                <div class=cardOverlay></div>
+                <b>Ishita Madaan</b>
+                <p>Financial Equity & Data Suture Surgeon</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="normalCard" style="background-image: url('/stocksImageOne.webp'); color: white;">
+                <div class="cardOverlay"></div>
+                <b>Ananya Goswami</b>
+                <p>Chief Surgeon of Investments</p>
+            </div>
+            <div class="normalCard" style="background-image: url('/humanBrain.jpg'); color: white;">
+                <b>Gauri Mishra</b>
+                <p>Scalpel Portfolio Manager</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="normalCard" style="background-image: url('stocksImageTwo.jpg'); color: white;">
+                <div class="cardOverlay"></div>
+                <b>Aarav Mahajan</b>
+                <p>Investment Strategist & Operation Planner</p>
+            </div>
+            <div class="normalCard" style="background-color: rgb(170, 2, 255); color: white;">
+                <b>Manaswi Panwar</b>
+                <p>Risk Management Surgeon</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="smallCard" style="background-color: rgb(250, 6, 68); color: white; min-height: 150px;">
+                <b>Aanya Ahuja</b>
+                <p>Quantitative Mastery Surgeon</p>
+            </div>
+            <div class="largeCard" style="min-height: 250px; background-color: rgb(104, 104, 104); color: white;">
+                <b>Praneel Pathak</b>
+                <p>Algorithmic Precision Specialist</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const marquee = document.getElementById('marqueeImgs')
+        var loadedPercent = 0
+        marqueeRect = marquee.getBoundingClientRect()
+        const myInterval = setInterval(() => {
+            marqueeStyleLeft = Number(marquee.style.left.slice(0, -2))
+            if (marqueeStyleLeft <= -(document.body.offsetWidth)) {
+                marquee.style.left = '0px'
+                marqueeStyleLeft = 0
+            }
+            console.log(document.body.offsetWidth)
+            marquee.style.left = (marqueeStyleLeft - 1) + 'px'
+            window.scrollTo(0, window.scrollY)
+        }, 5)
+        const loadInterval = setInterval(() => {
+            const loadingBar = document.getElementById('loadingBar')
+            loadingBar.style.width = `${loadedPercent}%`
+            document.getElementById('loadedPercentage').innerHTML = loadedPercent
+            if (document.readyState == 'complete') {
+                console.log('done')
+                document.getElementById('loadingScreen').style.display = 'none'
+                clearInterval(loadInterval)
+            } else if (loadedPercent == 99) {
+                console.log('wait!')
+            } else {
+                loadedPercent += 1
+            }
+        }, 40)
+        window.onload = () => {
+            document.getElementById('bgOverlay').style.height = document.getElementById('bgLoop').getBoundingClientRect().height + 'px'
+        }
+        function toggleCollapsed(e) {
+            const toCollapse = e.target.parentElement.children[1]
+            if (e.target == toCollapse) return;
+            const stylesOfElmnt = window.getComputedStyle(toCollapse),
+                styleDisplay = stylesOfElmnt.getPropertyValue('display')
+            if (styleDisplay == 'none') {
+                console.log('hidden!')
+                toCollapse.style.display = 'block'
+                e.target.style.borderBottomRightRadius = '0px'
+                e.target.style.borderBottomLeftRadius = '0px'
+                console.log(e.target)
+                setTimeout(() => {
+                    toCollapse.style.transform = 'scale(1, 1)'
+                }, 50)
+            } else {
+                toCollapse.style.transform = 'scale(1, 0)'
+                e.target.style.borderBottomRightRadius = '50px'
+                e.target.style.borderBottomLeftRadius = '50px'
+                setTimeout(() => {
+                    toCollapse.style.display = 'none'
+                }, 400)
+            }
+        }
+        
+        function handleInputFocus(t) {
+            const myLabel = document.getElementById(t)
+            myLabel.style.transform = 'translate(-17px, -17px) scale(0.7, 0.7)'
+        }
+
+        function handleInputBlur(t, e) {
+            if (e.target.value.length > 0) return;
+            const myLabel = document.getElementById(t)
+            myLabel.style.transform = 'translate(0, 0) scale(1, 1)'
+        }
+        for (let i = 18; i < 101; i++) {
+            const newOption = document.createElement('option')
+            newOption.value = i.toString()
+            newOption.innerHTML = i.toString()
+            document.getElementById('ageSelect').appendChild(newOption)
+        }
+    </script>
+</body>
+</html>
